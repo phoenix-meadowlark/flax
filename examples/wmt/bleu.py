@@ -186,14 +186,15 @@ def bleu_partial(ref_lines, hyp_lines, case_sensitive=False):
 
 
 def complete_bleu(matches_by_order,
-                 possible_matches_by_order,
-                 reference_length,
-                 translation_length,
-                 max_order=4,
-                 use_bp=True):
+                  possible_matches_by_order,
+                  reference_length,
+                  translation_length,
+                  max_order=4,
+                  use_bp=True):
   """Compute BLEU score from aggregated n-gram statistics."""
   precisions = [0] * max_order
   smooth = 1.0
+  geo_mean = 0.0
   for i in range(0, max_order):
     if possible_matches_by_order[i] > 0:
       precisions[i] = matches_by_order[i] / possible_matches_by_order[i]
